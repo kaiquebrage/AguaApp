@@ -1,56 +1,71 @@
-package com.example.aguapp;
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.CheckBox;
-import android.view.View;
-public class AguappActivity extends Activity {
-EditText edt1, edt2, edt3, edt4, edt5, edt6, edt7, edt8, edt9;
-CheckBox chk1;
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-super.onCreate(savedInstanceState);
-setContentView(R.layout.activity_aguapp);
-edt1 = (EditText) findViewById(R.id.editText1);
-edt2 = (EditText) findViewById(R.id.editText2);
-edt3 = (EditText) findViewById(R.id.editText3);
-edt4 = (EditText) findViewById(R.id.editText4);
-edt5 = (EditText) findViewById(R.id.editText5);
-edt6 = (EditText) findViewById(R.id.editText6);
-edt7 = (EditText) findViewById(R.id.editText7);
-edt8 = (EditText) findViewById(R.id.editText8);
-edt9 = (EditText) findViewById(R.id.editText9);
-chk1= (CheckBox) findViewById(R.id.checkBox1);
-}
-public void calcular(View V) {
-double area_jardim, con_construcao, taxa_emergencia, reserva_inf,
-reserva_sup;
-double reserva_incendio_sup, reserva_incendio, reserva;
-int quantidade_lavanderia, total_pessoas,num_pessoas,num_carros;
-int consumo_diario, num_apartamentos, num_pavimentos, lavanderia,
-num_lavanderia;
-consumo_diario = 200;
-num_pessoas = Integer.parseInt(edt1.getText().toString());
-num_apartamentos = Integer.parseInt(edt2.getText().toString());
-num_pavimentos = Integer.parseInt(edt3.getText().toString());
-num_carros = Integer.parseInt(edt4.getText().toString());
-area_jardim = Double.parseDouble(edt5.getText().toString());
-total_pessoas = (num_pessoas * num_apartamentos* num_pavimentos);
-if (chk1.isChecked()) {
-lavanderia = 1;
-} else {
-lavanderia = 0;
-}
-num_lavanderia = Integer.parseInt(edt6.getText().toString());
-quantidade_lavanderia = (lavanderia * num_lavanderia);
-con_construcao = (consumo_diario * total_pessoas) + (num_carros *
-50) + (area_jardim * 1.5) + (quantidade_lavanderia * 80);
-taxa_emergencia =(con_construcao* 2);
-reserva=(taxa_emergencia*0.2)
-reserva_inf = (taxa_emergencia * 0.6);
-reserva_sup = (taxa_emergencia * 0.4)+reserva;
-edt7.setText(String.valueOf(taxa_emergencia));
-edt8.setText(String.valueOf(reserva_inf));
-edt9.setText(String.valueOf(reserva_sup));
-}
-}
+# 💧 ÁguApp – Dimensionamento de Reservatórios Prediais
+
+Aplicativo Android para cálculo automático de **dimensionamento de reservatórios de água fria predial**, seguindo a norma **NBR 5626**. Voltado para engenheiros, arquitetos e técnicos de instalações hidráulicas.
+
+---
+
+## 📱 Funcionalidades
+
+- Entrada de dados do projeto hidráulico:
+  - Número de moradores (residentes + empregado(a))
+  - Apartamentos por andar
+  - Quantidade de pavimentos
+  - Vagas de garagem
+  - Área do jardim
+  - Existência e número de lavanderias
+
+- Cálculo automático de:
+  - **Consumo total de água com reserva (CTRA)**
+  - **Reservatório Inferior**
+  - **Reservatório Superior com reserva técnica para combate a incêndios**
+
+- Interface simples e direta para Android
+
+---
+
+## 📷 Tela do Aplicativo
+
+Exemplo de interface do ÁguApp em execução:
+
+<img width="284" height="494" alt="screenshot-tela" src="https://github.com/user-attachments/assets/fd034b58-9dc2-43a3-9e6f-5b98561fd3e4" />
+<img width="330" height="494" alt="screenshot-tela2" src="https://github.com/user-attachments/assets/9e60815f-1a66-4cdd-8def-1dbc361cb286" />
+
+---
+
+## 🧮 Fórmulas Utilizadas
+
+| Fórmula                        | Descrição                                                    |
+|-------------------------------|--------------------------------------------------------------|
+| Consumo da construção (C)      | (200 × nº pessoas) + (50 × nº carros) + (1,5 × área jardim) + (80 × nº lavanderias) |
+| Consumo Total c/ Reservação (CTRA) | C × 2                                                      |
+| Reserva de Incêndio            | CTRA × 0,2                                                  |
+| Reservatório Inferior          | CTRA × 0,6                                                  |
+| Reservatório Superior          | (CTRA × 0,4) + (CTRA × 0,2)                                |
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Java** (Android SDK)
+- **Android** Studio
+- **XML** (Interface Layout)
+- Componentes nativos: (`<EditText>`, `<TextView>`, `<CheckBox>`, `<Button>`).
+  
+---
+
+## 🗂️ Estrutura do Repositório
+
+  ├── app/
+│   ├── java/com/example/aguapp/
+│   │   └── AguappActivity.java      # Lógica do cálculo
+│   └── res/layout/
+│       └── activity_aguapp.xml      # Layout da interface
+├── AndroidManifest.xml
+└── README.md
+
+---
+
+## 👥 Autores
+
+- João Henrique
+- Kaique Bragé
